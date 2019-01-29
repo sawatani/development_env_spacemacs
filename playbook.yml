@@ -3,7 +3,4 @@
   roles:
     - andrewrothstein.miniconda
     - ansible-haskell
-  - name: stack upgrade
-    become: yes
-    become_user: root
-    command: yes | stack upgrade
+    - andrewrothstein.conda-env

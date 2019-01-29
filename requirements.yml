@@ -1,0 +1,3 @@
+- src: andrewrothstein.miniconda
+- src: andrewrothstein.conda-env
+- src: https://github.com/fathens/ansible-haskell.git
