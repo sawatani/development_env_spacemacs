@@ -2,7 +2,7 @@
   remote_user: vagrant
   roles:
     - andrewrothstein.miniconda
-    - andrewrothstein.haskell
+    - ansible-haskell
   - name: stack upgrade
     become: yes
     become_user: root
