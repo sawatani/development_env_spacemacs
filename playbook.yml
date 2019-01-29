@@ -1,0 +1,9 @@
+- hosts: targets
+  remote_user: vagrant
+  roles:
+    - andrewrothstein.miniconda
+    - andrewrothstein.haskell
+  - name: stack upgrade
+    become: yes
+    become_user: root
+    command: yes | stack upgrade
