@@ -6,3 +6,13 @@ miniconda_make_sys_default: true
 conda_env_name: jnote
 conda_env_environment: conda-jnote.yml
 conda_env_activate_for_login_shell: true
+
+manala_apt_packages:
+  - git
+  - libtinfo-dev
+  - libzmq3-dev
+  - libcairo2-dev
+  - libpango1.0-dev
+  - libmagic-dev
+  - libblas-dev
+  - liblapack-dev

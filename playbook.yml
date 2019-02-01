@@ -1,6 +1,8 @@
 - hosts: targets
   remote_user: vagrant
+  become: yes
   roles:
+    - manala.apt
     - andrewrothstein.miniconda
-    - ansible-haskell
     - andrewrothstein.conda-env
+    - ansible-haskell
