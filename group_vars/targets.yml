@@ -27,3 +27,4 @@ haskell_stack_checksums:
 haskell_stack_resolver: 'lts-13.5'
 
 jupyter_notebook_dir: "{{ansible_env.HOME}}/devel/Jupyter"
+jupyter_notebook_repo: https://github.com/sawatani/jupyter_storage.git

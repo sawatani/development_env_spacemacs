@@ -18,31 +18,38 @@
     command: stack install --fast
     args:
       chdir: "{{build_dir}}/IHaskell"
-      creates: '{{ansible_env.HOME}}/.local/bin/ihaskell'
+      creates: "{{ansible_env.HOME}}/.local/bin/ihaskell"
     environment:
       PATH: "{{ansible_env.HOME}}/.local/bin:{{haskell_stack_link_dir}}:{{ansible_env.PATH}}"
   - name: install IHaskell to Jupyter
-    command: bash -l -c 'ihaskell install --stack'
+    command: bash -l -c "ihaskell install --stack"
     args:
-      creates: '{{ansible_env.HOME}}/.ihaskell'
+      creates: "{{ansible_env.HOME}}/.ihaskell"
 
+  - name: clone storage of jupyter notebooks
+    git:
+      repo: "{{jupyter_notebook_repo}}"
+      dest: "{{jupyter_notebook_dir}}/storage"
+  - name: put jupyter's run.sh
+    with_items:
+      - f: jupyter-run.sh
+        d: "{{jupyter_notebook_dir}}"
+        m: '0744'
+      - f: jupyter-config.py
+        d: "{{jupyter_notebook_dir}}"
+    template:
+      src: "{{item.f}}.j2"
+      dest: "{{item.d}}/{{item.f}}"
+      mode: "{{item.m|default('0644')}}"
   - name: put jupyter.service
     become: yes
     with_items:
       - f: jupyter.service
         d: /etc/systemd/system
     template:
-      src: '{{item.f}}.j2'
-      dest: '{{item.d}}/{{item.f}}'
-      mode: '{{item.m|default("0644")}}'
-  - name: put jupyter's run.sh
-    with_items:
-      - f: jupyter-run.sh
-        d: '{{jupyter_notebook_dir}}'
-    template:
-      src: '{{item.f}}.j2'
-      dest: '{{item.d}}/{{item.f}}'
-      mode: '{{item.m|default("0744")}}'
+      src: "{{item.f}}.j2"
+      dest: "{{item.d}}/{{item.f}}"
+      mode: "{{item.m|default('0644')}}"
   - name: start service of jupyter
     become: yes
     shell: |
