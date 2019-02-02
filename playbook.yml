@@ -10,6 +10,22 @@
     import_role:
       name: manala.apt
 
+  - name: copy key of github
+    copy:
+      src: ~/.ssh/github
+      dest: "{{ansible_env.HOME}}/.ssh/github"
+      mode: 0600
+  - name: setup ssh-config for github
+    blockinfile:
+      path: "{{ansible_env.HOME}}/.ssh/config"
+      create: yes
+      maker: ""
+      block: |
+        Host github github.com
+          HostName github.com
+          Identityfile ~/.ssh/github
+          User git
+
   - name: clone IHaskell
     git:
       repo: https://github.com/gibiansky/IHaskell
@@ -33,14 +49,15 @@
   - name: put jupyter's run.sh
     with_items:
       - f: jupyter-run.sh
-        d: "{{jupyter_notebook_dir}}"
+        d: "{{jupyter_notebook_dir}}/run.sh"
         m: '0744'
       - f: jupyter-config.py
-        d: "{{jupyter_notebook_dir}}"
+        d: "{{jupyter_notebook_dir}}/config.py"
+        m: '0644'
     template:
       src: "{{item.f}}.j2"
-      dest: "{{item.d}}/{{item.f}}"
-      mode: "{{item.m|default('0644')}}"
+      dest: "{{item.d}}"
+      mode: "{{item.m}}"
   - name: put jupyter.service
     become: yes
     with_items:
