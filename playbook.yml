@@ -1,8 +1,34 @@
 - hosts: targets
   remote_user: vagrant
-  become: yes
   roles:
-    - manala.apt
-    - andrewrothstein.miniconda
-    - andrewrothstein.conda-env
-    - ansible-haskell
+  - andrewrothstein.miniconda
+  - andrewrothstein.conda-env
+  - ansible-haskell
+  tasks:
+  - name: install apt
+    become: yes
+    import_role:
+      name: manala.apt
+
+  - name: check for installation of ihaskell ...
+    stat:
+      path: '{{ansible_env.HOME}}/.local/bin/ihaskell'
+    changed_when: false
+    register: ihaskell_binary
+  - when: not ihaskell_binary.stat.exists
+    block:
+      - name: clone IHaskell ...
+        git:
+          repo: https://github.com/gibiansky/IHaskell
+          dest: /tmp/IHaskell
+      - name: install IHaskell ...
+        shell: |
+          {{haskell_stack_link_dir}}/stack install --fast
+          {{ansible_env.HOME}}/.local/bin/ihaskell install --stack
+        args:
+          chdir: /tmp/IHaskell
+    always:
+      - name: cleanup IHaskell ...
+        file:
+          path: /tmp/IHaskell
+          state: absent
