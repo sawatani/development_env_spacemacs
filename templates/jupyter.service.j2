@@ -4,7 +4,7 @@ Description=Jupyter Notebook
 [Service]
 Type=simple
 PIDFile=/run/jupyter.pid
-ExecStart={{jupyter_notebook_dir}}/jupyter-run.sh
+ExecStart={{jupyter_notebook_dir}}/run.sh
 User={{ansible_env.USER}}
 Group={{ansible_env.USER}}
 WorkingDirectory={{jupyter_notebook_dir}}
