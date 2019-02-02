@@ -38,14 +38,22 @@
     environment:
       PATH: "{{ansible_env.HOME}}/.local/bin:{{haskell_stack_link_dir}}:{{ansible_env.PATH}}"
   - name: install IHaskell to Jupyter
-    command: bash -l -c "ihaskell install --stack"
+    command: bash -l -c 'ihaskell install --stack'
     args:
       creates: "{{ansible_env.HOME}}/.ihaskell"
 
+  - name: get jupyter data dir
+    command: bash -l -c 'jupyter --data-dir'
+    register: jupyter_data_dir
+  - name: clone jupyter-vim-binding
+    git:
+      repo: https://github.com/lambdalisue/jupyter-vim-binding
+      dest: "{{jupyter_data_dir.stdout}}/nbextensions/vim_binding"
   - name: clone storage of jupyter notebooks
     git:
       repo: "{{jupyter_notebook_repo}}"
       dest: "{{jupyter_notebook_dir}}/storage"
+      force: yes
   - name: put jupyter's run.sh
     with_items:
       - f: jupyter-run.sh
