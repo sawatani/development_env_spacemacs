@@ -19,7 +19,7 @@
     blockinfile:
       path: "{{ansible_env.HOME}}/.ssh/config"
       create: yes
-      maker: ""
+      marker: ""
       block: |
         Host github github.com
           HostName github.com
