@@ -10,25 +10,42 @@
     import_role:
       name: manala.apt
 
-  - name: check for installation of ihaskell ...
-    stat:
-      path: '{{ansible_env.HOME}}/.local/bin/ihaskell'
-    changed_when: false
-    register: ihaskell_binary
-  - when: not ihaskell_binary.stat.exists
-    block:
-      - name: clone IHaskell ...
-        git:
-          repo: https://github.com/gibiansky/IHaskell
-          dest: /tmp/IHaskell
-      - name: install IHaskell ...
-        shell: |
-          {{haskell_stack_link_dir}}/stack install --fast
-          {{ansible_env.HOME}}/.local/bin/ihaskell install --stack
-        args:
-          chdir: /tmp/IHaskell
-    always:
-      - name: cleanup IHaskell ...
-        file:
-          path: /tmp/IHaskell
-          state: absent
+  - name: clone IHaskell
+    git:
+      repo: https://github.com/gibiansky/IHaskell
+      dest: "{{build_dir}}/IHaskell"
+  - name: install IHaskell
+    command: stack install --fast
+    args:
+      chdir: "{{build_dir}}/IHaskell"
+      creates: '{{ansible_env.HOME}}/.local/bin/ihaskell'
+    environment:
+      PATH: "{{ansible_env.HOME}}/.local/bin:{{haskell_stack_link_dir}}:{{ansible_env.PATH}}"
+  - name: install IHaskell to Jupyter
+    command: bash -l -c 'ihaskell install --stack'
+    args:
+      creates: '{{ansible_env.HOME}}/.ihaskell'
+
+  - name: put jupyter.service
+    become: yes
+    with_items:
+      - f: jupyter.service
+        d: /etc/systemd/system
+    template:
+      src: '{{item.f}}.j2'
+      dest: '{{item.d}}/{{item.f}}'
+      mode: '{{item.m|default("0644")}}'
+  - name: put jupyter's run.sh
+    with_items:
+      - f: jupyter-run.sh
+        d: '{{jupyter_notebook_dir}}'
+    template:
+      src: '{{item.f}}.j2'
+      dest: '{{item.d}}/{{item.f}}'
+      mode: '{{item.m|default("0744")}}'
+  - name: start service of jupyter
+    become: yes
+    shell: |
+      systemctl enable jupyter.service
+      systemctl daemon-reload
+      systemctl restart jupyter.service

@@ -1,3 +1,5 @@
+build_dir: "{{ansible_env.HOME}}/devel/workspace"
+
 miniconda_ver: '4.5.12'
 miniconda_checksums:
   Miniconda3-4.5.12-Linux-x86_64.sh: md5:866ae9dff53ad0874e1d1a60b1ad1ef8
@@ -23,3 +25,5 @@ haskell_stack_checksums:
     # https://github.com/commercialhaskell/stack/releases/download/v1.9.3/stack-1.9.3-linux-x86_64.tar.gz
     linux-x86_64: sha256:e2363728e5818ccc68db9371c15af892a9a1fc86d808d0a9a77257f13696e946
 haskell_stack_resolver: 'lts-13.5'
+
+jupyter_notebook_dir: "{{ansible_env.HOME}}/devel/Jupyter"
