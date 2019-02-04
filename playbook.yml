@@ -19,11 +19,11 @@
     blockinfile:
       path: "{{ansible_env.HOME}}/.ssh/config"
       create: yes
-      marker: ""
       block: |
         Host github github.com
           HostName github.com
           Identityfile ~/.ssh/github
+          StrictHostKeyChecking no
           User git
 
   - name: clone IHaskell
