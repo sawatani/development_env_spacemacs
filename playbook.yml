@@ -54,6 +54,15 @@
       repo: "{{jupyter_notebook_repo}}"
       dest: "{{jupyter_notebook_dir}}/storage"
       force: yes
+  - name: setup git config to clean ipynb
+    blockinfile:
+      path: "{{jupyter_notebook_dir}}/storage/.git/{{item.file}}"
+      create: yes
+      block: |
+        {{item.content}}
+    with_items:
+    - "{{jupyter_notebook_gitconfig}}"
+
   - name: put jupyter's run.sh
     with_items:
       - f: jupyter-run.sh
