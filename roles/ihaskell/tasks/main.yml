@@ -1,0 +1,13 @@
+- name: clone IHaskell
+  git:
+    repo: "{{ihaskell_repo}}"
+    dest: "{{build_dir}}/IHaskell"
+- name: install IHaskell
+  command: bash -l -c 'stack install --fast'
+  args:
+    chdir: "{{build_dir}}/IHaskell"
+    creates: "{{ansible_env.HOME}}/.local/bin/ihaskell"
+- name: install IHaskell to Jupyter
+  command: bash -l -c 'ihaskell install --stack'
+  args:
+    creates: "{{ansible_env.HOME}}/.ihaskell"

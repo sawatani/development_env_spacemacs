@@ -1,0 +1,11 @@
+- hosts: targets
+  remote_user: vagrant
+  roles:
+  - role: manala.apt
+    become: yes
+  - ssh-config
+  - andrewrothstein.miniconda
+  - andrewrothstein.conda-env
+  - ansible-haskell
+  - ihaskell
+  - jupyter-notebook

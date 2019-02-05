@@ -1,0 +1,16 @@
+- name: copy files of ssh
+  copy:
+    src: "~/.ssh/{{item.name}}"
+    dest: "{{ansible_env.HOME}}/.ssh/{{item.name}}"
+    mode: "{{item.mode|default('0600')}}"
+  with_items:
+  - "{{ssh_copy_files}}"
+
+- name: put files of ssh
+  blockinfile:
+    path: "{{ansible_env.HOME}}/.ssh/{{item.name}}"
+    create: yes
+    block: |
+      {{item.content}}
+  with_items:
+  - "{{ssh_put_files}}"

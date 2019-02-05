@@ -1,0 +1,22 @@
+jupyter_vim_binding_repo: "https://github.com/lambdalisue/jupyter-vim-binding"
+
+jupyter_notebook_dir: "{{ansible_env.HOME}}/devel/Jupyter"
+
+jupyter_notebook_storage:
+  repo: git@github.com:sawatani/jupyter_storage.git
+  dir: "{{jupyter_notebook_dir}}/storage"
+
+jupyter_notebook_gitconfig:
+  - file: info/exclude
+    content: |
+      .*
+  - file: info/attributes
+    content: |
+      *.ipynb filter=clean_ipynb
+      *.ipynb diff=ipynb
+  - file: config
+    content: |
+      [filter "clean_ipynb"]
+        required = true
+        smudge = cat
+        clean = jq --indent 1 --monochrome-output '. + if .metadata.git.suppress_outputs | not then { cells: [.cells[] | . + if .cell_type == \"code\" then { outputs: [], execution_count: null } else {} end ] } else {} end'
