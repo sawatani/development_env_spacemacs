@@ -10,6 +10,8 @@ jupyter_notebook_gitconfig:
   - file: info/exclude
     content: |
       .*
+      *.py
+      Untitled.ipynb
   - file: info/attributes
     content: |
       *.ipynb filter=clean_ipynb
