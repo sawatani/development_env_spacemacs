@@ -1,0 +1,10 @@
+stack_deps:
+- apply-refact
+- hlint
+- stylish-haskell
+- hasktags
+- hoogle
+- intero
+- hindent
+
+spacemacs_repo: https://github.com/syl20bnr/spacemacs
