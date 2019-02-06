@@ -9,11 +9,13 @@
 - name: install stack packages
   command: "bash -l -c 'stack install {{stack_deps|join(' ')}}'"
 
+- name: initialize hoogle
+  command: bash -l -c 'hoogle generate'
+
 - name: clone spacemacs
   git:
     repo: "{{spacemacs_repo}}"
     dest: "{{ansible_env.HOME}}/.emacs.d"
-
 - name: copy dot.spacemacs file
   copy:
     src: dot.spacemacs
