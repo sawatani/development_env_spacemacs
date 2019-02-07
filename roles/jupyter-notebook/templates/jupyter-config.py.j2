@@ -22,9 +22,9 @@ def post_save(model, os_path, contents_manager):
     for deleted in rdeleted.stdout.splitlines():
         name, ext = os.path.splitext(deleted)
         if ext == ".ipynb":
-            run(split(f"git rm {deleted}"), cwd=workdir, check=True)
+            run(split(f"git rm '{deleted}'"), cwd=workdir, check=True)
             p = name + ".py"
-            run(split(f"rm -f {p}"), cwd=workdir, check=True)
+            run(split(f"rm -f '{p}'"), cwd=workdir, check=True)
 
     # git commit / git push
     r = run(split(f"git commit -m 'save {filename}'"), cwd=workdir)
