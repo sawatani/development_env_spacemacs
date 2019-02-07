@@ -7,8 +7,8 @@ dependencies:
   - backcall=0.1.0=py37_0
   - blas=1.0=mkl
   - bzip2=1.0.6=h14c3975_5
-  - ca-certificates=2018.11.29=ha4d7672_0
-  - certifi=2018.11.29=py37_1000
+  - ca-certificates=2019.1.23=0
+  - certifi=2018.11.29=py37_0
   - cffi=1.11.5=py37he75722e_1
   - chardet=3.0.4=py37_1
   - conda=4.6.1=py37_0
@@ -71,7 +71,7 @@ dependencies:
   - notebook=5.7.4=py37_0
   - numpy=1.11.3=py37h1d66e8a_10
   - numpy-base=1.11.3=py37h81de0dd_10
-  - openssl=1.1.1a=h14c3975_1000
+  - openssl=1.1.1a=h7b6447c_0
   - pandoc=2.2.3.2=0
   - pandocfilters=1.4.2=py37_1
   - parso=0.3.1=py37_0
@@ -115,9 +115,8 @@ dependencies:
   - wheel=0.32.3=py37_0
   - xz=5.2.4=h14c3975_4
   - yaml=0.1.7=had09818_2
+  - yapf=0.25.0=py37_0
   - zeromq=4.2.5=hf484d3e_1
   - zlib=1.2.11=h7b6447c_3
-  - pip:
-    - bleach==3.1.0
 prefix: /usr/local/Miniconda3-4.5.12-Linux-x86_64/envs/jnote
 
