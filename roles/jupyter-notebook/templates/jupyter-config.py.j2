@@ -4,32 +4,32 @@ from shlex import split
 
 def post_save(model, os_path, contents_manager):
     """post-save hook for doing a git commit / push"""
-    if model['type'] != 'notebook':
+    if model["type"] != "notebook":
         return # only do this for notebooks
     workdir, filename = os.path.split(os_path)
     name, ext = os.path.splitext(filename)
-    if name == 'Scratch' or name == 'Untitled':
+    if name == "Scratch" or name == "Untitled":
         return # skip scratch and untitled notebooks
 
     # save as py file
-    run(split(f'jupyter nbconvert --to script {filename}'), cwd=workdir, check=True)
+    run(split(f"jupyter nbconvert --to script '{filename}'"), cwd=workdir, check=True)
 
     # git add
-    run(split(f'git add {filename}'), cwd=workdir, check=True)
+    run(split(f"git add '{filename}'"), cwd=workdir, check=True)
 
     # detect deleted files
-    rdeleted = run(split('git ls-files --deleted'), cwd=workdir, check=True, capture_output=True, text=True)
+    rdeleted = run(split("git ls-files --deleted"), cwd=workdir, check=True, capture_output=True, text=True)
     for deleted in rdeleted.stdout.splitlines():
         name, ext = os.path.splitext(deleted)
-        if ext == '.ipynb':
-            run(split(f'git rm {deleted}'), cwd=workdir, check=True)
-            p = name + '.py'
-            run(split(f'rm -f {p}'), cwd=workdir, check=True)
+        if ext == ".ipynb":
+            run(split(f"git rm {deleted}"), cwd=workdir, check=True)
+            p = name + ".py"
+            run(split(f"rm -f {p}"), cwd=workdir, check=True)
 
     # git commit / git push
-    r = run(split(f'git commit -m "save {filename}"'), cwd=workdir)
+    r = run(split(f"git commit -m 'save {filename}'"), cwd=workdir)
     if r.returncode == 0:
-        run(split('git push'), cwd=workdir, check=True)
+        run(split("git push"), cwd=workdir, check=True)
 
 c.FileContentsManager.post_save_hook = post_save
 
