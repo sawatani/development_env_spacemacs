@@ -1,4 +1,5 @@
 stack_deps:
+- hmatrix
 - apply-refact
 - hlint
 - stylish-haskell

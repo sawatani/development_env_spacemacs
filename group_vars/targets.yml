@@ -1,4 +1,5 @@
 manala_apt_packages:
+- aspell
 - git
 - jq
 - libtinfo-dev
