@@ -3,12 +3,11 @@ from subprocess import run
 from shlex import split
 
 def post_save(model, os_path, contents_manager):
-    """post-save hook for doing a git commit / push"""
     if model["type"] != "notebook":
         return # only do this for notebooks
     workdir, filename = os.path.split(os_path)
     name, ext = os.path.splitext(filename)
-    if name == "Scratch" or name == "Untitled":
+    if name.startswith("Scratch") or name.startswith("Untitled"):
         return # skip scratch and untitled notebooks
 
     # save as py file
@@ -23,8 +22,8 @@ def post_save(model, os_path, contents_manager):
         name, ext = os.path.splitext(deleted)
         if ext == ".ipynb":
             run(split(f"git rm '{deleted}'"), cwd=workdir, check=True)
-            p = name + ".py"
-            run(split(f"rm -f '{p}'"), cwd=workdir, check=True)
+            for file in glob.glob(f"{workdir}/{name}.*"):
+                run(split(f"rm -f '{file}'"), cwd=workdir, check=True)
 
     # git commit / git push
     r = run(split(f"git commit -m 'save {filename}'"), cwd=workdir)
