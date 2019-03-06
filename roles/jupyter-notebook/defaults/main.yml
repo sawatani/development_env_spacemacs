@@ -11,7 +11,8 @@ jupyter_notebook_gitconfig:
     content: |
       .*
       *.py
-      Untitled.ipynb
+      *.hs
+      Untitled*
   - file: info/attributes
     content: |
       *.ipynb filter=clean_ipynb
