@@ -12,7 +12,8 @@
   git:
     repo: "{{jupyter_notebook_storage.repo}}"
     dest: "{{jupyter_notebook_storage.dir}}"
-    force: yes
+    update: no
+    force: no
 - name: setup git config to clean ipynb
   blockinfile:
     path: "{{jupyter_notebook_storage.dir}}/.git/{{item.file}}"
