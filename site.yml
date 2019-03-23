@@ -3,6 +3,7 @@
   roles:
   - role: manala.apt
     become: yes
+  - account
   - ssh-config
   - andrewrothstein.miniconda
   - andrewrothstein.conda-env

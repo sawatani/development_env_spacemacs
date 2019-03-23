@@ -1,0 +1,5 @@
+- name: bashrc
+  blockinfile:
+    dest: "{{ansible_env.HOME}}/.bashrc"
+    block: |
+      {{bashrc_contents}}
