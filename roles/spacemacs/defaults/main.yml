@@ -7,5 +7,6 @@ stack_deps:
 - hoogle
 - intero
 - hindent
+- regex
 
 spacemacs_repo: https://github.com/syl20bnr/spacemacs
