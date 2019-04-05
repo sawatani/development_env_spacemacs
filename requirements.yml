@@ -1,4 +1,8 @@
 - src: manala.apt
+  version: 1.0.35
 - src: andrewrothstein.miniconda
+  version: v5.2.4
 - src: andrewrothstein.conda-env
+  version: v2.0.6
 - src: https://github.com/fathens/ansible-haskell.git
+  version: master

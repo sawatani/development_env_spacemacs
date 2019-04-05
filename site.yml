@@ -1,13 +1,35 @@
-- hosts: targets
+- hosts: all
   remote_user: vagrant
   roles:
   - role: manala.apt
     become: yes
+    vars:
+      manala_apt_packages:
+      - aspell
+      - git
+      - jq
+      - libtinfo-dev
+      - libzmq3-dev
+      - libcairo2-dev
+      - libpango1.0-dev
+      - libmagic-dev
+      - libblas-dev
+      - liblapack-dev
   - account
   - ssh-config
-  - andrewrothstein.miniconda
-  - andrewrothstein.conda-env
-  - ansible-haskell
+  - role: andrewrothstein.miniconda
+    vars:
+      miniconda_ver: '4.5.12'
+  - role: andrewrothstein.conda-env
+    vars:
+      conda_env_name: jnote
+      conda_env_environment: conda-jnote.yml
+      conda_env_activate_for_login_shell: true
+      conda_env_update_if_present: true
+  - role: ansible-haskell
+    vars:
+      haskell_stack_ver: '1.9.3'
+      haskell_stack_resolver: 'lts-13.5'
   - ihaskell
   - jupyter-notebook
   - spacemacs
