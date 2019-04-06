@@ -11,6 +11,7 @@ Vagrant.configure(2) do |config|
     config.disksize.size = "100GB"
   end
   config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--cpuexecutioncap", "80"]
     vb.memory = "4096"
   end
   config.vm.provision "ansible" do |ansible|

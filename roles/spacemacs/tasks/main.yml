@@ -7,7 +7,8 @@
       name: emacs26-nox
 
 - name: install stack packages
-  command: "bash -l -c 'stack install {{stack_deps|join(' ')}}'"
+  command: "bash -l -c 'stack install {{item}}'"
+  with_items: "{{stack_deps}}"
 
 - name: initialize hoogle
   command: bash -l -c 'hoogle generate'
