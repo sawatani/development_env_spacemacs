@@ -32,7 +32,7 @@ def post_save(model, os_path, contents_manager):
 
 c.FileContentsManager.post_save_hook = post_save
 
-c.NotebookApp.ip = '{{inventory_hostname}}'
+c.NotebookApp.ip = '0.0.0.0'
 c.NotebookApp.open_browser = False
 c.NotebookApp.password_required = False
 c.NotebookApp.token = ''
