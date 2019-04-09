@@ -5,8 +5,10 @@
   git:
     repo: "{{jupyter_vim_binding_repo}}"
     dest: "{{jupyter_data_dir.stdout}}/nbextensions/vim_binding"
-- name: enable vim_binding to jupyter
-  command: bash -l -c 'jupyter nbextension enable vim_binding/vim_binding'
+
+- name: enable jupyter extentions
+  command: "bash -l -c 'jupyter nbextension enable {{item}}'"
+  with_items: "{{jupyter_extentions}}"
 
 - name: clone storage of jupyter notebooks
   git:

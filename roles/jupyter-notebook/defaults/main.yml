@@ -1,5 +1,12 @@
 jupyter_vim_binding_repo: "https://github.com/lambdalisue/jupyter-vim-binding"
 
+jupyter_extentions:
+- vim_binding/vim_binding
+- equation-numbering/main
+- limit_output/main
+- autosavetime/main
+- livemdpreview/livemdpreview
+
 jupyter_notebook_dir: "{{ansible_env.HOME}}/devel/Jupyter"
 
 jupyter_notebook_storage:
