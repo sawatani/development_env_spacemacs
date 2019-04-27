@@ -8,5 +8,8 @@ stack_deps:
 - intero
 - hindent
 - regex
+- http-client
+- zlib
+- binary
 
 spacemacs_repo: https://github.com/syl20bnr/spacemacs
