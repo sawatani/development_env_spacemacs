@@ -18,6 +18,5 @@ Vagrant.configure(2) do |config|
     ansible.playbook = "site.yml"
     ansible.galaxy_role_file = "requirements.yml"
     ansible.galaxy_roles_path = "~/.ansible/roles"
-    ansible.raw_arguments = ["-e", "ansible_python_interpreter=/usr/bin/python3"]
   end
 end
