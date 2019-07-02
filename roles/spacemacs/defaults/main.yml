@@ -11,5 +11,6 @@ stack_deps:
 - http-client
 - zlib
 - binary
+- mwc-random
 
 spacemacs_repo: https://github.com/syl20bnr/spacemacs
