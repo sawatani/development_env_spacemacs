@@ -1,4 +1,5 @@
 #!/bin/bash -l
 
-cd $(dirname $0)
-jupyter-notebook --config=config.py storage
+dir=$(cd $(dirname $0); pwd)
+
+jupyter-notebook --config=${dir}/config.py ${dir}/storage
