@@ -5,20 +5,6 @@
         that: "ansible_version.full is version_compare('2.8', '>=')"
   remote_user: vagrant
   roles:
-  - role: manala.apt
-    become: yes
-    vars:
-      manala_apt_packages:
-      - aspell
-      - git
-      - jq
-      - libtinfo-dev
-      - libzmq3-dev
-      - libcairo2-dev
-      - libpango1.0-dev
-      - libmagic-dev
-      - libblas-dev
-      - liblapack-dev
   - account
   - ssh-config
   - role: andrewrothstein.miniconda
