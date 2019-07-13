@@ -1,3 +1,10 @@
+keyservers:
+- server: keyserver.ubuntu.com
+  id: E298A3A825C0D65DFD57CBB651716619E084DAB9
+
+repositories:
+- deb https://cran.rstudio.com/bin/linux/ubuntu bionic-cran35/
+
 packages:
 - aspell
 - bash-completion
@@ -6,6 +13,7 @@ packages:
 - jq
 - zip
 - unzip
+- r-base
 - libtinfo-dev
 - libzmq3-dev
 - libcairo2-dev

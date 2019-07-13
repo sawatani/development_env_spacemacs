@@ -2,6 +2,20 @@
   become: yes
   command: timedatectl set-timezone Asia/Tokyo
 
+- name: add keys from server
+  apt_key:
+    keyserver: "{{item.server}}"
+    id: "{{item.id}}"
+  with_items:
+    "{{keyservers}}"
+
+- name: add source.list
+  apt_repository:
+    repo: "{{item}}"
+    state: present
+  with_items:
+    "{{repositories}}"
+
 - name: install packages
   become: yes
   apt:
