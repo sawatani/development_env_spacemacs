@@ -1,6 +1,6 @@
 - src: andrewrothstein.miniconda
-  version: v5.2.4
+  version: v5.2.6
 - src: andrewrothstein.conda-env
-  version: v2.0.6
+  version: v2.0.7
 - src: https://github.com/fathens/ansible-haskell.git
   version: master
