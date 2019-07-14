@@ -3,6 +3,7 @@
   command: timedatectl set-timezone Asia/Tokyo
 
 - name: add keys from server
+  become: yes
   apt_key:
     keyserver: "{{item.server}}"
     id: "{{item.id}}"
@@ -10,6 +11,7 @@
     "{{keyservers}}"
 
 - name: add source.list
+  become: yes
   apt_repository:
     repo: "{{item}}"
     state: present

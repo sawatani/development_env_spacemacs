@@ -8,6 +8,8 @@ repositories:
 packages:
 - aspell
 - bash-completion
+- fonts-noto-cjk
+- gdebi-core
 - git
 - git-flow
 - jq

@@ -1,0 +1,7 @@
+rstudio_server:
+  url: https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.2.1335-amd64.deb
+  checksum: md5:7e84f384a87e219d20c00d8a6bccf532
+
+client:
+  username: rstudio
+  password: rstudio

@@ -1,0 +1,20 @@
+- name: download RStudio
+  get_url:
+    url: "{{rstudio_server.url}}"
+    checksum: "{{rstudio_server.checksum}}"
+    dest: /tmp/rstudio-server.deb
+
+- name: install RStudio
+  become: yes
+  command: bash -l -c 'yes | gdebi /tmp/rstudio-server.deb'
+
+- name: remove tmp file
+  file:
+    path: /tmp/rstudio-server.deb
+    state: absent
+
+- name: add user for RStudio
+  become: yes
+  user:
+    name: "{{client.username}}"
+    password: "{{ client.password | password_hash('sha512') }}"
