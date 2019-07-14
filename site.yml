@@ -20,6 +20,5 @@
     vars:
       haskell_stack_ver: '1.9.3'
       haskell_stack_resolver: 'lts-13.12'
-  - ihaskell
   - jupyter-notebook
   - spacemacs
