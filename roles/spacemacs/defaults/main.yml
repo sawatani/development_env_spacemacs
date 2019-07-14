@@ -1,16 +1,1 @@
-stack_deps:
-- hmatrix
-- apply-refact
-- hlint
-- stylish-haskell
-- hasktags
-- hoogle
-- intero
-- hindent
-- regex
-- http-client
-- zlib
-- binary
-- mwc-random
-
 spacemacs_repo: https://github.com/syl20bnr/spacemacs

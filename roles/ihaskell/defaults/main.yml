@@ -1,6 +1,0 @@
-build_dir: "{{ansible_env.HOME}}/devel/workspace"
-
-haskellr:
-  repo: https://github.com/tweag/HaskellR
-  version: v0.10.2
-  dir: "{{build_dir}}/HaskellR"

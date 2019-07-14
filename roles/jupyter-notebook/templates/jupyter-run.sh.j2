@@ -2,4 +2,5 @@
 
 dir=$(cd $(dirname $0); pwd)
 
-jupyter-notebook --config=${dir}/config.py ${dir}/storage
+cd "{{haskellr.dir}}"
+stack exec jupyter -- notebook --config=${dir}/config.py ${dir}/storage

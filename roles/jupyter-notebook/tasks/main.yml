@@ -1,3 +1,37 @@
+- name: clone HaskellR
+  git:
+    repo: "{{haskellr.repo}}"
+    dest: "{{haskellr.dir}}"
+    version: "{{haskellr.version}}"
+    force: yes
+
+- name: install HaskellR
+  command: bash -l -c 'stack install'
+  args:
+    chdir: "{{haskellr.dir}}"
+    creates: "{{ansible_env.HOME}}/.local/bin/H"
+
+- name: install IHaskell to Jupyter
+  command: bash -l -c 'stack exec ihaskell install'
+  args:
+    chdir: "{{haskellr.dir}}"
+    creates: "{{ansible_env.HOME}}/.ihaskell"
+
+- name: install stack packages
+  command: "bash -l -c 'stack install {{item}}'"
+  args:
+    chdir: "{{haskellr.dir}}"
+  with_items: "{{stack_deps}}"
+
+- name: initialize hoogle
+  command: bash -l -c 'stack exec hoogle -- generate'
+  args:
+    chdir: "{{haskellr.dir}}"
+
+- name: install R libraries
+  become: yes
+  command: bash -l -c "Rscript -e 'install.packages(\"tidyverse\")'"
+
 - name: get jupyter data dir
   command: bash -l -c 'jupyter --data-dir'
   register: jupyter_data_dir

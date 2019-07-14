@@ -30,3 +30,23 @@ jupyter_notebook_gitconfig:
         required = true
         smudge = cat
         clean = jq --indent 1 --monochrome-output '. + if .metadata.git.suppress_outputs | not then { cells: [.cells[] | . + if .cell_type == \"code\" then { outputs: [], execution_count: null } else {} end ] } else {} end'
+
+haskellr:
+  repo: https://github.com/tweag/HaskellR
+  version: v0.10.2
+  dir: "{{ansible_env.HOME}}/devel/workspace/HaskellR"
+
+stack_deps:
+- hmatrix
+- apply-refact
+- hlint
+- stylish-haskell
+- hasktags
+- hoogle
+- intero
+- hindent
+- regex
+- http-client
+- zlib
+- binary
+- mwc-random
