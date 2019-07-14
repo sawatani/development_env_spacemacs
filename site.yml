@@ -6,7 +6,7 @@
   remote_user: vagrant
   roles:
   - account
-  - ssh-config
+  - git-ssh
   - role: andrewrothstein.miniconda
     vars:
       miniconda_ver: '4.5.12'

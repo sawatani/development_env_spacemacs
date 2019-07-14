@@ -18,3 +18,9 @@
   user:
     name: "{{client.username}}"
     password: "{{ client.password | password_hash('sha512') }}"
+
+- name: setup ssh for github
+  include_role:
+    name: git-ssh
+  vars:
+    username: "{{client.username}}"

@@ -1,3 +1,12 @@
+username: "{{ansible_user_id}}"
+home_dir: "/home/{{username}}"
+groupname: "{{username}}"
+
+gitconfig_contents: |
+  [user]
+  name = {{username}}
+  email = devel@fathens.org
+
 ssh_copy_files:
 - name: github
 
