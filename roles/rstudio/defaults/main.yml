@@ -5,3 +5,7 @@ rstudio_server:
 client:
   username: rstudio
   password: rstudio
+
+libralies:
+- tidyverse
+- cowplot

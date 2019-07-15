@@ -28,10 +28,6 @@
   args:
     chdir: "{{haskellr.dir}}"
 
-- name: install R libraries
-  become: yes
-  command: bash -l -c "Rscript -e 'install.packages(\"tidyverse\")'"
-
 - name: get jupyter data dir
   command: bash -l -c 'jupyter --data-dir'
   register: jupyter_data_dir

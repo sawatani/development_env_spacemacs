@@ -13,6 +13,11 @@
     path: /tmp/rstudio-server.deb
     state: absent
 
+- name: install R libraries
+  become: yes
+  command: bash -l -c "Rscript -e 'install.packages(\"{{item}}\")'"
+  with_items: "{{libralies}}"
+
 - name: add user for RStudio
   become: yes
   user:
