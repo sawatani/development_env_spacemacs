@@ -29,3 +29,10 @@
     name: git-ssh
   vars:
     username: "{{client.username}}"
+
+- name: install IRkernel
+  become: yes
+  command: bash -l -c "Rscript -e 'install.packages(\"IRkernel\")'"
+
+- name: install IR to jupyter
+  command: bash -l -c "Rscript -e 'IRkernel::installspec()'"
