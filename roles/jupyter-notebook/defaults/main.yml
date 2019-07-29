@@ -50,3 +50,5 @@ stack_deps:
 - zlib
 - binary
 - mwc-random
+- csv-conduit
+- lens
