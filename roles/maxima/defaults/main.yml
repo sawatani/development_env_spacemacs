@@ -24,12 +24,6 @@ quicklisp:
     (quit)
 
 maxima_highlight:
-  - src: maxima.js
-    dest_dir: maxima
-    dir: notebook/static/components/codemirror/mode
-    patch:
-      file: codemirror-mode-meta-patch
-      target: meta.js
   - src: maxima_lexer.py
     dest_dir: ""
     dir: pygments/lexers
