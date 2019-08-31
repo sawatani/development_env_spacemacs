@@ -68,11 +68,11 @@
   when: quicklisp_dir.stat.exists == False
 
 - name: install Quicklisp
-  command: "bash -l -c 'sbcl --load {{ tmpdir.path }}/installer.lisp'"
+  command: "bash -l -c 'sbcl --load {{ tmpdir.path }}/installer.lisp --eval \"(quit)\"'"
   when: quicklisp_dir.stat.exists == False
 
 - name: remove temporary dir for Quicklisp
-  tempfile:
+  file:
     path: "{{ tmpdir.path }}"
     state: absent
   when: quicklisp_dir.stat.exists == False
