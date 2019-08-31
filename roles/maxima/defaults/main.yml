@@ -1,0 +1,38 @@
+workdir: "{{ ansible_env.HOME }}/devel/workspace"
+
+maxima_jupyter:
+  repo: git@github.com:robert-dodier/maxima-jupyter.git
+  version: master
+  dir: "{{ workdir }}/maxima-jupyter"
+
+maxima:
+  repo: git://git.code.sf.net/p/maxima/code
+  version: 5.43.0
+  dir: "{{ workdir }}/maxima"
+
+sbcl:
+  repo: git://git.code.sf.net/p/sbcl/sbcl
+  version: sbcl-1.5.6
+  dir: "{{ workdir }}/sbcl"
+
+quicklisp:
+  url: https://beta.quicklisp.org/quicklisp.lisp
+  batch: |
+    (quicklisp-quickstart:install)
+    (ql-util:without-prompting
+      (ql:add-to-init-file))
+    (quit)
+
+maxima_highlight:
+  - src: maxima.js
+    dest_dir: maxima
+    dir: notebook/static/components/codemirror/mode
+    patch:
+      file: codemirror-mode-meta-patch
+      target: meta.js
+  - src: maxima_lexer.py
+    dest_dir: ""
+    dir: pygments/lexers
+    patch:
+      file: pygments-mapping-patch
+      target: _mapping.py
