@@ -19,6 +19,7 @@ jupyter_notebook_gitconfig:
       .*
       *.py
       *.hs
+      *.log
       Untitled*
   - file: info/attributes
     content: |
