@@ -12,21 +12,22 @@ packages:
 - gdebi-core
 - git
 - git-flow
-- jq
-- zip
-- unzip
-- r-base
-- texinfo
 - gnuplot
+- jq
+- libblas-dev
+- libcairo2-dev
+- libcurl4-openssl-dev
+- liblapack-dev
+- libmagic-dev
+- libpango1.0-dev
+- libssl-dev
 - libtinfo-dev
 - libzmq3-dev
-- libcairo2-dev
-- libpango1.0-dev
-- libmagic-dev
-- libblas-dev
-- liblapack-dev
-- libcurl4-openssl-dev
-- libssl-dev
+- r-base
+- texinfo
+- texlive-xetex
+- unzip
+- zip
 
 bashrc_contents: |
   {% raw %}PS1='\[\033[01;32m\]\u@\h[\D{%Y/%m/%d %H:%M:%S}]:\[\033[00m\]\[\033[01;34m\]\w\[\033[00m\]\n\$ '{% endraw %}
