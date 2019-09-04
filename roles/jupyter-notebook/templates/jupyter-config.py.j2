@@ -10,9 +10,6 @@ def post_save(model, os_path, contents_manager):
     if name.startswith("Scratch") or name.startswith("Untitled"):
         return # skip scratch and untitled notebooks
 
-    # save as py file
-    run(split(f"jupyter nbconvert --to script '{filename}'"), cwd=workdir, check=True)
-
     # git pull, add
     run(split(f"git pull"), cwd=workdir, check=True)
     run(split(f"git add '{filename}'"), cwd=workdir, check=True)
