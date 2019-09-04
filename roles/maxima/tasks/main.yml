@@ -122,6 +122,12 @@
   command: "bash -l -c \"python -c 'import site; print(site.getsitepackages()[0])'\""
   register: site_packages
 
+- name: put latex template
+  become: yes
+  copy:
+    src: hidecode.tplx
+    dest: "{{ site_packages.stdout }}/nbconvert/templates/latex/"
+
 - name: ceate dir of code-highlight for Maxima
   become: yes
   file:
