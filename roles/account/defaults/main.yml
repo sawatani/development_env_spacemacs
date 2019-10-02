@@ -1,40 +1,4 @@
-keyservers:
-- server: keyserver.ubuntu.com
-  id: E298A3A825C0D65DFD57CBB651716619E084DAB9
-
-repositories:
-- deb https://cran.rstudio.com/bin/linux/ubuntu bionic-cran35/
-
-packages:
-- aspell
-- bash-completion
-- fonts-noto-cjk
-- gdebi-core
-- git
-- git-flow
-- gnuplot
-- jq
-- libblas-dev
-- libcairo2-dev
-- libcurl4-openssl-dev
-- liblapack-dev
-- libmagic-dev
-- libpango1.0-dev
-- libssl-dev
-- libtinfo-dev
-- libzmq3-dev
-- r-base
-- texinfo
-- texlive-xetex
-- unzip
-- zip
-
 bashrc_contents: |
   {% raw %}PS1='\[\033[01;32m\]\u@\h[\D{%Y/%m/%d %H:%M:%S}]:\[\033[00m\]\[\033[01;34m\]\w\[\033[00m\]\n\$ '{% endraw %}
 
   export PROMPT_COMMAND='history -a; echo'
-
-gitconfig_contents: |
-  [user]
-  name = vagrant
-  email = devel@fathens.org

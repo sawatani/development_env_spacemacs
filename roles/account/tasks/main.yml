@@ -2,39 +2,9 @@
   become: yes
   command: timedatectl set-timezone Asia/Tokyo
 
-- name: add keys from server
-  become: yes
-  apt_key:
-    keyserver: "{{item.server}}"
-    id: "{{item.id}}"
-  with_items:
-    "{{keyservers}}"
-
-- name: add source.list
-  become: yes
-  apt_repository:
-    repo: "{{item}}"
-    state: present
-  with_items:
-    "{{repositories}}"
-
-- name: install packages
-  become: yes
-  apt:
-    name: "{{packages}}"
-    state: present
-    update_cache: yes
-
 - name: bashrc
   blockinfile:
     dest: "{{ansible_env.HOME}}/.bashrc"
     create: yes
     block: |
       {{bashrc_contents}}
-
-- name: gitconfig
-  blockinfile:
-    dest: "{{ansible_env.HOME}}/.gitconfig"
-    create: yes
-    block: |
-      {{gitconfig_contents}}

@@ -16,4 +16,3 @@
     src: dot.spacemacs
     dest: "{{ansible_env.HOME}}/.spacemacs"
     mode: '0644'
-

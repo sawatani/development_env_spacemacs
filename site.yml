@@ -1,26 +1,19 @@
 - hosts: all
   pre_tasks:
-    - name: Verify Ansible version requirements.
-      assert:
-        that: "ansible_version.full is version_compare('2.8', '>=')"
+  - name: Verify Ansible version requirements.
+    assert:
+      that: "ansible_version.full is version_compare('2.8', '>=')"
   remote_user: vagrant
+  vars:
+    jupyter_notebook_storage_repo: git@github.com:sawatani/jupyter_storage.git
+    jupyter_kernels:
+    - haskell
+    - maxima
+    - rstudio
+    github_account:
+      name: 沢谷 邦夫
+      email: fsawa@fathens.org
   roles:
   - account
-  - git-ssh
-  - role: andrewrothstein.miniconda
-    vars:
-      miniconda_ver: '4.5.12'
-  - role: andrewrothstein.conda-env
-    vars:
-      conda_env_name: jnote
-      conda_env_environment: conda-jnote.yml
-      conda_env_activate_for_login_shell: true
-      conda_env_update_if_present: true
-  - role: ansible-haskell
-    vars:
-      haskell_stack_ver: '1.9.3'
-      haskell_stack_resolver: 'lts-13.12'
-  - jupyter-notebook
-  - maxima
   - spacemacs
-  - rstudio
+  - sawatani.jupyter_kernels
