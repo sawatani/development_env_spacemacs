@@ -8,3 +8,9 @@
     create: yes
     block: |
       {{bashrc_contents}}
+
+- name: copy tmux.conf file
+  copy:
+    src: tmux.conf
+    dest: "{{ansible_env.HOME}}/.tmux.conf"
+    mode: '0644'
