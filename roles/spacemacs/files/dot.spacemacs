@@ -32,7 +32,10 @@ values."
    dotspacemacs-configuration-layers
    '(
      python
-     haskell
+     (haskell :variables
+              haskell-enable-hindent-style "johan-tibell"
+              haskell-completion-backend 'ghci
+              haskell-process-type 'stack-ghci)
      html
      yaml
      ;; ----------------------------------------------------------------
@@ -59,7 +62,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     (lsp-ui :location (recipe :fetcher github :repo "emacs-lsp/lsp-ui"))
+     (lsp-haskell :location (recipe :fetcher github :repo "emacs-lsp/lsp-haskell"))
+     )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -322,10 +329,14 @@ you should place your code here."
     (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
     (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
-  (golden-ratio-mode t)
+  (require 'lsp-mode)
+  (require 'lsp-ui)
+  (require 'lsp-haskell)
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (add-hook 'haskell-mode-hook #'lsp)
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-haskell-process-path-hie "hie-wrapper")
 
-  (setq-default dotspacemacs-configuration-layers
-                '((haskell :variables haskell-enable-hindent-style "johan-tibell")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

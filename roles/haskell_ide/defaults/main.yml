@@ -1,0 +1,5 @@
+all_hies_url: https://github.com/infinisil/all-hies/tarball/master
+
+hie_ghcs:
+- ghc864
+- ghc865

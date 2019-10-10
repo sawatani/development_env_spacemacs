@@ -1,0 +1,16 @@
+- name: install nix
+  command: bash -l -c 'curl https://nixos.org/nix/install | sh'
+  args:
+    creates: "{{ ansible_env.HOME }}/.nix-profile/"
+
+- name: install cashix
+  command: bash -l -c 'nix-env -iA nixpkgs.cachix'
+
+- name: enable cash of all-hie
+  command: bash -l -c 'cachix use all-hies'
+
+- set_fact:
+    ghc_selector: "p: { inherit (p) {{ hie_ghcs | join(' ') }}; }"
+
+- name: install hie of selected ghc
+  command: bash -l -c "nix-env -iA selection --arg selector '{{ ghc_selector }}' -f {{ all_hies_url }}"
