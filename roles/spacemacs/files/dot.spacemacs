@@ -34,6 +34,7 @@ values."
      python
      (haskell :variables
               haskell-enable-hindent-style "johan-tibell"
+              haskell-compile-ignore-cabal t
               haskell-completion-backend 'ghci
               haskell-process-type 'stack-ghci)
      html
